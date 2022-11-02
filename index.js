@@ -1,9 +1,10 @@
 const express = require ('express');
 const { getConnection } = require ('./db/db-connection-mongo');
+require ('dotenv').config
 
 
 const app = express();
-const port = 7000;
+const port = process.env.PORT;
 
 getConnection();
 
