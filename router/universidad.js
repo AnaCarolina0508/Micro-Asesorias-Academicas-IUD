@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const Universidad = require('../models/Universidad');
 const router = Router();
-
+const {validarUniversidad} = require('../helpers/validar-universidad');
 
 router.get('/', async function (req, res) {
     try {
@@ -14,6 +14,12 @@ router.get('/', async function (req, res) {
 });
 router.post('/', async function (req, res) {
     try {
+
+        const validaciones = validarUniversidad(req);
+
+        if (validaciones.length>0) {
+            return res.status(400).send(validaciones);
+        }
 
         let universidad = new Universidad();
         universidad.nombre = req.body.nombre;

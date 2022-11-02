@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Etapas = require('../models/Etapas');
+const {validarEtapas} = require('../helpers/validar-etapas');
 
 
 router.get('/', async function (req, res) {
@@ -14,6 +15,11 @@ router.get('/', async function (req, res) {
 });
 router.post('/', async function (req, res) {
     try {
+        const validaciones = validarEtapas(req);
+
+        if (validaciones.length>0) {
+            return res.status(400).send(validaciones);
+        }
 
         let etapas = new Etapas();
         etapas.nombre = req.body.nombre;

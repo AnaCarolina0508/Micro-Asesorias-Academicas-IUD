@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const TipoProyecto = require('../models/TipoProyecto');
+const { validarTipoProyecto } = require('../helpers/validar-tipoProyecto');
 
 
 router.get('/', async function (req, res) {
@@ -14,6 +15,11 @@ router.get('/', async function (req, res) {
 });
 router.post('/', async function (req, res) {
     try {
+        const validaciones = validarTipoProyecto(req);
+
+        if (validaciones.length > 0) {
+            return res.status(400).send(validaciones);
+        }
 
         let tipoProyecto = new TipoProyecto();
         tipoProyecto.nombre = req.body.nombre;
@@ -25,7 +31,7 @@ router.post('/', async function (req, res) {
         console.log(error);
         res.status(500).send('Ocurrio un error');
     }
-    
+
 });
 
 router.put('/:tipoProyectoId', async function (req, res) {

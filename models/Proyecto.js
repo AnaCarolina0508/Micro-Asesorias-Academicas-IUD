@@ -45,9 +45,9 @@ const ProyectoSchema = Schema({
         ref: 'Universidad',
         required: true
     },
-    etapaProyecto: {
+    etapas: {
         type: Schema.Types.ObjectId,
-        ref: 'EtapaProyecto',
+        ref: 'Etapas',
         required: true
     },
     
