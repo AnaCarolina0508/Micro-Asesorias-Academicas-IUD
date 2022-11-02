@@ -1,17 +1,51 @@
-const { Router } = require('express'); 
-
+const { Router } = require('express');
+const Universidad = require('../models/Universidad');
 const router = Router();
 
-router.get('/', function(req, res){
-    res.send('Estoy desde universidad GET');
+
+router.get('/', async function (req, res) {
+    try {
+        const universidades = await Universidad.find();
+        res.send(universidades);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Ocurrio un error');
+    }
+});
+router.post('/', async function (req, res) {
+    try {
+
+        let universidad = new Universidad();
+        universidad.nombre = req.body.nombre;
+        universidad.direccion = req.body.direccion;
+        universidad.telefono = req.body.telefono;
+        universidad.fechaCreacion = new Date();
+        universidad.fechaActualizacion = new Date();
+        universidad = await universidad.save();
+        res.send(universidad);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Ocurrio un error');
+    }
+    
 });
 
-router.post('/', function(req, res){
-    res.send('Estoy desde universidad POST');
-});
-
-router.put('/', function(req, res){
-    res.send('Estoy desde universidad PUT');
+router.put('/:universidadId', async function (req, res) {
+    try {
+        let universidad = await Universidad.findById(req.params.universidadId);
+        if (!universidad) {
+            return res.status(400).send('Etapas no existe');
+        }
+        universidad.nombre = req.body.nombre;
+        universidad.direccion = req.body.direccion;
+        universidad.telefono = req.body.telefono;
+        universidad.fechaActualizacion = new Date();
+        universidad = await universidad.save();
+        res.send(universidad);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Ocurrio un error');
+    }
 });
 
 module.exports = router;
