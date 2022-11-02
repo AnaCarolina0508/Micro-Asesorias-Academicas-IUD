@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Cliente = require('../models/Cliente');
+const {validarCliente} = require('../helpers/validar-cliente');
 
 router.get('/', async function (req, res) {
     try {
@@ -15,6 +16,11 @@ router.get('/', async function (req, res) {
 
 router.post('/', async function (req, res) {
     try {
+        const validaciones = validarCliente(req);
+
+        if (validaciones.length>0) {
+            return res.status(400).send(validaciones);
+        }
 
         console.log('Objeto recibido', req.body);
 

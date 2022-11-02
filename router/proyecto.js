@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const Proyecto = require('../models/Proyecto');
+const {validarProyecto } = require('../helpers/validar-proyecto');
 const router = Router();
 
 router.get('/', async function (req, res) {
@@ -26,7 +27,11 @@ router.get('/', async function (req, res) {
 });
 router.post('/', async function (req, res) {
     try {
-        
+        const validaciones = validarProyecto(req);
+
+        if (validaciones.length > 0) {
+            return res.status(400).send(validaciones);
+        }
         const existeProyectoPorNumero = await Proyecto.findOne({ numero: req.body.numero });
         if (existeProyectoPorNumero) {
             return res.status(400).send('Ya existe el numero para otro proyecto');
