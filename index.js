@@ -10,7 +10,6 @@ getConnection();
 
 //Parseo JSON
 app.use(express.json());
-
 app.use( '/cliente', require('./router/cliente') );
 app.use( '/universidad', require('./router/universidad') );
 app.use( '/etapas', require('./router/etapas') );

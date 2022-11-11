@@ -1,5 +1,9 @@
 const { Router } = require('express');
 const Proyecto = require('../models/Proyecto');
+const Cliente = require('../models/Cliente');
+const Etapa = require('../models/Etapa');
+const TipoProyecto = require('../models/TipoProyecto');
+const Universidad = require('../models/Universidad');
 const {validarProyecto } = require('../helpers/validar-proyecto');
 const router = Router();
 
