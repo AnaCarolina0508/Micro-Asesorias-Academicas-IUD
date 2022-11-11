@@ -4,5 +4,9 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
+<<<<<<< HEAD
 EXPOSE 6000
+=======
+EXPOSE 4000
+>>>>>>> f188f4cd91464a74572614495dc8dec3a164241e
 CMD [ "node", "index.js" ]
