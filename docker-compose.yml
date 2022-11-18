@@ -5,5 +5,5 @@ services:
    image: anacarolinag/micro-asesorias:v1
    ports:
     - "6000:6000"
-    networks: 
-     - micro-asesorias-iud
+   networks: 
+    - micro-asesorias-iud
