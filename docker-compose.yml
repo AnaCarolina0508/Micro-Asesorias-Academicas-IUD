@@ -1,9 +1,13 @@
 version: '3.7'
 services: 
   micro-asesorias-academicas:
-   container_name: 'micro-asesorias-academicas' 
-   image: anacarolinag/micro-asesorias:v1
+   container_name: 'micro-asesoriasiud1'
+   image: anacarolinag/micro-asesorias:v4
    ports:
-    - "6000:6000"
+    - "5001:5000" 
    networks: 
-    - micro-asesorias-iud
+    - microasesoriasiud
+
+networks:
+  microasesoriasiud:
+    external: true
