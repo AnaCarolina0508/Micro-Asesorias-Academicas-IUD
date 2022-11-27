@@ -8,6 +8,8 @@ const router = Router();
 
 router.get('/', async function (req, res) {
     try {
+        console.log('Ambiente: ', process.env.CONTAINER_HOST);
+
         const proyectos = await Proyecto.find().populate([
             {
                 path: 'etapas', select: 'nombre'

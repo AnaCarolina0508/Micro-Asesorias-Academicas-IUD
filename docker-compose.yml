@@ -1,13 +1,41 @@
 version: '3.7'
 services: 
-  micro-asesorias-academicas:
+  micro-asesorias-academicas1:
    container_name: 'micro-asesoriasiud1'
    image: anacarolinag/micro-asesorias:v4
+   build:
+    context: .
    ports:
-    - "5001:5000" 
+    - "6053:5000" 
    networks: 
     - microasesoriasiud
-
+   environment:
+    CONTAINER_HOST: micro-asesorias-academicas1
+  micro-asesorias-academicas2:
+   container_name: 'micro-asesoriasiud2'
+   image: anacarolinag/micro-asesorias:v4
+   build:
+    context: .
+   ports:
+    - "6054:5000" 
+   networks: 
+    - microasesoriasiud
+   environment:
+    CONTAINER_HOST: micro-asesorias-academicas2
+  load-balancer:
+   container_name: 'load-balancer'
+   image: load-balancer:v1
+   build:
+    context: ./load-balancer
+   ports:
+    - "8082:80" 
+   networks: 
+    - microasesoriasiud
+   depends_on:
+    - micro-asesorias-academicas1
+    - micro-asesorias-academicas2
+   restart: always
+    
 networks:
   microasesoriasiud:
     external: true
