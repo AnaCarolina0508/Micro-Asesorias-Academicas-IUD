@@ -35,7 +35,5 @@ services:
     - micro-asesorias-academicas1
     - micro-asesorias-academicas2
    restart: always
-    
 networks:
   microasesoriasiud:
-    external: true
