@@ -28,7 +28,7 @@ services:
    build:
     context: ./load-balancer
    ports:
-    - "8082:80" 
+    - "6055:80" 
    networks: 
     - microasesoriasiud
    depends_on:
