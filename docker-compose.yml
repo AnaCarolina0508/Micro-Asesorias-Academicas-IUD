@@ -22,8 +22,8 @@ services:
     - microasesoriasiud
    environment:
     CONTAINER_HOST: micro-asesorias-academicas2
-  load-balancer:
-   container_name: 'load-balancer'
+  load-balancer-anacjuanc:
+   container_name: 'load-balancer-anacjuanc'
    image: load-balancer:v1
    build:
     context: ./load-balancer
