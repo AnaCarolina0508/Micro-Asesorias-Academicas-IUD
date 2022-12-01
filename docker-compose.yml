@@ -3,8 +3,6 @@ services:
   micro-asesorias-academicas1:
    container_name: 'micro-asesoriasiud1'
    image: anacarolinag/micro-asesorias:v4
-   build:
-    context: .
    ports:
     - "6053:5000" 
    networks: 
@@ -14,8 +12,6 @@ services:
   micro-asesorias-academicas2:
    container_name: 'micro-asesoriasiud2'
    image: anacarolinag/micro-asesorias:v4
-   build:
-    context: .
    ports:
     - "6054:5000" 
    networks: 
